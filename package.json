@@ -1,0 +1,28 @@
+{
+  "name": "ml",
+  "version": "1.0.0",
+  "description": "Mobile Life",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=production webpack --progress --config webpack.config.js",
+    "start": "webpack-dev-server --progress --config webpack.config.js"
+  },
+  "author": "Vilius Roškus",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-react-jsx": "^6.23.0",
+    "babel-plugin-transform-react-jsx-self": "^6.22.0",
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "material-ui": "^0.17.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-tap-event-plugin": "^2.0.1"
+  }
+}
