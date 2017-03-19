@@ -1,6 +1,18 @@
-const React = require('react');
-const Question = require('./question');
-const Results = require('./results');
+const React = require('react')
+const api = require('./api')
+const Question = require('./question')
+const Results = require('./results')
+
+// Material UI
+const mui = require('material-ui')
+const Paper = mui.Paper
+const AppBar = mui.AppBar
+const CircularProgress = mui.CircularProgress
+
+const style = {
+  maxWidth: 600,
+  margin: '0 auto'
+}
 
 class Main extends React.Component {
 
@@ -9,32 +21,33 @@ class Main extends React.Component {
     this.state = {
       questions: null
     }
+    this.getQuestions = this.getQuestions.bind(this);
   }
 
-  componentWillMount() {
-    this.props.api.getQuestions().then(questions => {
+  getQuestions() {
+    return api.getQuestions().then(questions => {
       this.setState({ questions })
     })
   }
 
+  componentWillMount() {
+    this.getQuestions()
+  }
+
   render() {
     return ( 
-      <div>
-        <h1>Quiz</h1>
+      <Paper style={style} zDepth={3}>
+        <AppBar title="Quiz" iconElementLeft={false} />
         {this.state.questions ? 
           this.state.questions.map(question =>
-            <Question data={question} />
-          ) : <div>Loading</div>
+            <Question key={question.id} data={question} />
+          ) : <CircularProgress size={80} thickness={5} />
         }
-        <Results questions={this.state.questions} />
-      </div>
+        <Results questions={this.state.questions} updater={this.getQuestions} />
+      </Paper>
     )
   }
 
-}
-
-Main.propTypes = {
-  api: React.PropTypes.object.isRequired
 }
 
 module.exports = Main;

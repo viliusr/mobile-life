@@ -1,5 +1,5 @@
 {
-  "name": "ml",
+  "name": "mobile-life",
   "version": "1.0.0",
   "description": "Mobile Life",
   "main": "index.js",
@@ -9,6 +9,10 @@
   },
   "author": "Vilius Roškus",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viliusr/mobile-life-frontend.git"
+  },
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",

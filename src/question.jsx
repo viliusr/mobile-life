@@ -8,11 +8,11 @@ class Question extends React.Component {
 
     return (
       <div>
-        <h2 className="question-title">{question.title}</h2>
+        <h2 className="question-text">{question.text}</h2>
         <div className="question-answers">
-          {question.answers.map((item, index) => 
-            <div key={index} className="question-answer">
-              <input type="radio" name={question.title} onChange={() => question.selectedAnswer = index} /> {item}
+          {question.answers.map((item) => 
+            <div key={item.id} className="question-answer">
+              <input type="radio" name={question.id} onChange={() => question.selectedAnswer = item.id} /> {item.text}
             </div>
           )}
         </div>
@@ -21,5 +21,9 @@ class Question extends React.Component {
   }
 
 }
+
+Question.propTypes = {
+  question: React.PropTypes.object
+};
 
 module.exports = Question;
