@@ -1,5 +1,19 @@
 const React = require('react');
 
+// Material UI
+const mui = require('material-ui')
+const RadioButton = mui.RadioButton
+const RadioButtonGroup = mui.RadioButtonGroup
+
+const styles = {
+  radioButton: {
+    marginBottom: 16
+  },
+  padding: {
+    padding: '0 20px'
+  }
+};
+
 class Question extends React.Component {
 
   render() {
@@ -7,15 +21,13 @@ class Question extends React.Component {
     const question = this.props.data;
 
     return (
-      <div>
-        <h2 className="question-text">{question.text}</h2>
-        <div className="question-answers">
+      <div style={styles.padding}>
+        <h2>{question.text}</h2>
+        <RadioButtonGroup name={"question" + question.id} onChange={(event, value) => question.selectedAnswer = value}>
           {question.answers.map((item) => 
-            <div key={item.id} className="question-answer">
-              <input type="radio" name={question.id} onChange={() => question.selectedAnswer = item.id} /> {item.text}
-            </div>
+            <RadioButton value={item.id} key={item.id} label={item.text} style={styles.radioButton} />
           )}
-        </div>
+        </RadioButtonGroup>
       </div>
     )
   }

@@ -8,6 +8,7 @@ const mui = require('material-ui')
 const Paper = mui.Paper
 const AppBar = mui.AppBar
 const CircularProgress = mui.CircularProgress
+const Divider = mui.Divider;
 
 const style = {
   maxWidth: 600,
@@ -26,6 +27,7 @@ class Main extends React.Component {
 
   getQuestions() {
     return api.getQuestions().then(questions => {
+      delete this.state.questios;
       this.setState({ questions })
     })
   }
@@ -35,14 +37,15 @@ class Main extends React.Component {
   }
 
   render() {
-    return ( 
+    return (
       <Paper style={style} zDepth={3}>
-        <AppBar title="Quiz" iconElementLeft={false} />
+        <AppBar title="The Quiz" />
         {this.state.questions ? 
           this.state.questions.map(question =>
             <Question key={question.id} data={question} />
           ) : <CircularProgress size={80} thickness={5} />
         }
+        <Divider />
         <Results questions={this.state.questions} updater={this.getQuestions} />
       </Paper>
     )

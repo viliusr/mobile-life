@@ -1,9 +1,24 @@
 const React = require('react');
+const Grid = require('react-grid-system');
+const Row = Grid.Row;
+const Col = Grid.Col;
 const api = require('./api');
 
 // Material UI
 const mui = require('material-ui');
 const RaisedButton = mui.RaisedButton;
+
+const styles = {
+  padding: {
+    padding: 20
+  },
+  message: {
+    margin: '4px 0',
+    fontSize: 24
+  }
+};
+
+let allowToCheck = false;
 
 class Results extends React.Component {
 
@@ -31,21 +46,24 @@ class Results extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.results !== null ? 
-          <div>
-            {this.state.results ?
-              <span>Woo hoo!, everything is correct, now get to work</span>
+      <div style={styles.padding}>
+        <Row>
+          {this.state.results !== null ? 
+            this.state.results ?
+              <Col sm={8} style={styles.message}>OK, come to other side</Col>
               :
               <div>
-                <span>Nope, you can try again, or maybe go home</span>
-                <button onClick={() => this.reset()}>Try again</button>
+                <Col sm={8} style={styles.message}>You shall not pass</Col>
+                <Col sm={4} style={{ textAlign: "right" }}>
+                  <RaisedButton label="Try again" onClick={() => this.reset()} />
+                </Col>
               </div>
-            }
-          </div> 
-          : 
-          <RaisedButton label="Check results" primary={true} onClick={() => this.check()} />
-        }
+            :
+            <Col sm={12} style={{ textAlign: "right" }}>
+              <RaisedButton label="Check results" secondary={true} onClick={() => this.check()} />
+            </Col>
+          }
+        </Row>
       </div>
     )
   }
