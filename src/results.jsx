@@ -1,12 +1,11 @@
-const React = require('react');
-const Grid = require('react-grid-system');
-const Row = Grid.Row;
-const Col = Grid.Col;
-const api = require('./api');
+const React = require('react')
+const Grid = require('react-grid-system')
+const Row = Grid.Row
+const Col = Grid.Col
 
 // Material UI
-const mui = require('material-ui');
-const RaisedButton = mui.RaisedButton;
+const mui = require('material-ui')
+const RaisedButton = mui.RaisedButton
 
 const styles = {
   padding: {
@@ -15,52 +14,52 @@ const styles = {
   message: {
     margin: '4px 0',
     fontSize: 24
+  },
+  button: {
+    textAlign: 'right'
   }
-};
+}
 
 let allowToCheck = false;
 
 class Results extends React.Component {
 
-  constructor() {
-    super(),
-    this.state = { results: null }
-  }
-
   check() {
     let data = {};
+
+    this.props.toggleQuestionsAvailability()
 
     this.props.questions.forEach(question => {
       data[question.id] = question.selectedAnswer
     })
 
-    api.getResults(data).then(results => {
-      this.setState({ results: results.status })
-    })
+    this.props.checker(data)
   }
 
   reset() {
     // Get new questions
-    this.props.updater().then(() => this.setState({ results: null }))
+    this.props.updater().then(() => { 
+      this.props.toggleQuestionsAvailability() 
+    })
   }
 
   render() {
     return (
       <div style={styles.padding}>
         <Row>
-          {this.state.results !== null ? 
-            this.state.results ?
-              <Col sm={8} style={styles.message}>OK, come to other side</Col>
+          {this.props.resultsStatus !== null ? 
+            this.props.resultsStatus ?
+              <Col sm={8} style={styles.message}>Son, come to the dark side</Col>
               :
               <div>
                 <Col sm={8} style={styles.message}>You shall not pass</Col>
-                <Col sm={4} style={{ textAlign: "right" }}>
-                  <RaisedButton label="Try again" onClick={() => this.reset()} />
+                <Col sm={4} style={styles.button}>
+                  <RaisedButton label='Try again' onClick={() => this.reset()} />
                 </Col>
               </div>
             :
-            <Col sm={12} style={{ textAlign: "right" }}>
-              <RaisedButton label="Check results" secondary={true} onClick={() => this.check()} />
+            <Col sm={12} style={styles.button}>
+              <RaisedButton label='Check results' secondary={true} onClick={() => this.check()} />
             </Col>
           }
         </Row>
@@ -72,7 +71,10 @@ class Results extends React.Component {
 
 Results.propTypes = {
   questions: React.PropTypes.array,
-  updater: React.PropTypes.func
-};
+  updater: React.PropTypes.func,
+  checker: React.PropTypes.func,
+  toggleQuestionsAvailability: React.PropTypes.func,
+  resultsStatus: React.PropTypes.bool
+}
 
-module.exports = Results;
+module.exports = Results

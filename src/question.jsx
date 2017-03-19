@@ -23,9 +23,9 @@ class Question extends React.Component {
     return (
       <div style={styles.padding}>
         <h2>{question.text}</h2>
-        <RadioButtonGroup name={"question" + question.id} onChange={(event, value) => question.selectedAnswer = value}>
+        <RadioButtonGroup name={'question' + question.id} onChange={(event, value) => question.selectedAnswer = value}>
           {question.answers.map((item) => 
-            <RadioButton value={item.id} key={item.id} label={item.text} style={styles.radioButton} />
+            <RadioButton value={item.id} key={'answer' + item.id} label={item.text} disabled={this.props.disabled} style={styles.radioButton} />
           )}
         </RadioButtonGroup>
       </div>
@@ -35,7 +35,8 @@ class Question extends React.Component {
 }
 
 Question.propTypes = {
-  question: React.PropTypes.object
+  question: React.PropTypes.object,
+  disabled: React.PropTypes.bool
 };
 
 module.exports = Question;

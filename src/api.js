@@ -1,4 +1,4 @@
-require('isomorphic-fetch');
+require('isomorphic-fetch')
 
 function get(url) {
   return new Promise(resolve => {
@@ -27,4 +27,4 @@ const api = {
   getResults: (data) => post('http://localhost:3001/get_results', data)
 }
 
-module.exports = api;
+module.exports = api
