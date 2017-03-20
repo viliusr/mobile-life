@@ -35,7 +35,7 @@ class Question extends React.Component {
 }
 
 Question.propTypes = {
-  question: React.PropTypes.object,
+  data: React.PropTypes.object,
   disabled: React.PropTypes.bool
 };
 

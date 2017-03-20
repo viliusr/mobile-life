@@ -6,5 +6,6 @@
     "production": {
       "plugins": ["transform-react-jsx"]
     }
-  }
+  },
+  "presets": ["airbnb"]
 }
