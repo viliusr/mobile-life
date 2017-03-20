@@ -1,4 +1,5 @@
 require('isomorphic-fetch')
+const config = require('../config.json')
 
 function get(url) {
   return new Promise(resolve => {
@@ -23,8 +24,8 @@ function post(url, data) {
 }
 
 const api = {
-  getQuestions: () => get('http://localhost:3001/get_questions'),
-  getResults: (data) => post('http://localhost:3001/get_results', data)
+  getQuestions: () => get(config.serverUrl + '/get_questions'),
+  getResults: (data) => post(config.serverUrl + '/get_results', data)
 }
 
 module.exports = api
